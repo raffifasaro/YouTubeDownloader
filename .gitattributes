@@ -1,2 +1,1 @@
-Azure-ttk-theme-main/*.tcl linguist-vendored
-Azure-ttk-theme-main/theme/dark/*.tcl linguist-vendored
+*.tcl linguist-vendored
