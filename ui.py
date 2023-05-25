@@ -2,15 +2,12 @@ import tkinter as tk
 from tkinter import ttk
 import ytbDL
 
+# download path var
+download_path = None
+
 
 def download_video():
     video_url = stringEntry.get()
-    download_path = None
-
-    # Check if a download path is provided
-    if stringEntry2.get():
-        download_path = stringEntry2.get()
-
     ytbDL.download_video(video_url, download_path)
 
 
@@ -26,6 +23,7 @@ window.geometry('700x400')
 
 # column config
 window.columnconfigure(0, weight=1)
+window.rowconfigure(8, weight=1)
 
 # theme
 window.call('source', 'Azure-ttk-theme-main/azure.tcl')
@@ -53,10 +51,9 @@ entry.grid(row=2, column=0, padx=10, pady=0)
 button = ttk.Button(master=input_frame, text='Download', style='my.TButton', command=download_video)
 button.grid(row=3, column=0, padx=10, pady=(10, 35))
 
-
 # LOCATION
 # title
-t_label2 = ttk.Label(master=window, text='Destination path:', font='ArialRoundedMTBold 20')
+t_label2 = ttk.Label(master=window, text='Destination Path:', font='ArialRoundedMTBold 20')
 t_label2.grid(row=5, column=0, columnspan=2, padx=10, pady=(25, 10))
 
 # input field
@@ -67,8 +64,25 @@ input_frame2.grid(row=6, column=0, padx=10, pady=0)
 stringEntry2 = tk.StringVar()
 entry2 = ttk.Entry(master=input_frame2, width=50, textvariable=stringEntry2)
 entry2.grid(row=7, column=0, padx=10, pady=0)
+
+# CHECKBOX LOCATION
+checkbutton_var = tk.BooleanVar(value=False)
+checkbutton = tk.Checkbutton(input_frame2, variable=checkbutton_var, state=tk.DISABLED, padx=5, )
+checkbutton.grid(row=7, column=1, sticky='e')
+
+
+def confirm_button_actions():
+    global checkbutton_var
+    global download_path
+    # check box if input
+    condition = len(stringEntry2.get()) > 0
+    checkbutton_var.set(condition)
+
+    download_path = stringEntry2.get()
+
+
 # BUTTON LOCATION
-button2 = ttk.Button(master=input_frame2, text='Confirm', style='my2.TButton')
+button2 = ttk.Button(master=window, text='Confirm', style='my2.TButton', command=confirm_button_actions)
 button2.grid(row=8, column=0, padx=10, pady=10)
 
 # TODO add path confirmed checkbox

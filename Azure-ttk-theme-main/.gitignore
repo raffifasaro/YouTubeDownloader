@@ -3,11 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-Dark screenshot.png
-example.py
-Light screenshot.png
-screenshot.png
-
 # C extensions
 *.so
 
