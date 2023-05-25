@@ -4,8 +4,19 @@ import ytbDL
 
 
 # function
+"""def download_video():
+    ytbDL.download_video(stringEntry.get())"""
+
+
 def download_video():
-    ytbDL.download_video(stringEntry.get())
+    video_url = stringEntry.get()
+    download_path = None
+
+    # Check if a download path is provided
+    if stringEntry2.get():
+        download_path = stringEntry2.get()
+
+    ytbDL.download_video(video_url, download_path)
 
 
 # TODO remove
@@ -64,6 +75,8 @@ entry2.grid(row=7, column=0, padx=10, pady=0)
 # BUTTON LOCATION
 button2 = ttk.Button(master=input_frame2, text='Confirm', style='my2.TButton')
 button2.grid(row=8, column=0, padx=10, pady=10)
+
+# TODO add path confirmed checkbox
 
 
 # Image
