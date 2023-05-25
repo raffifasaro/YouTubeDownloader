@@ -3,11 +3,6 @@ from tkinter import ttk
 import ytbDL
 
 
-# function
-"""def download_video():
-    ytbDL.download_video(stringEntry.get())"""
-
-
 def download_video():
     video_url = stringEntry.get()
     download_path = None
