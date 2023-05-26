@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import ytbDL
+import json
 
 # download path var
 download_path = None
@@ -11,14 +12,45 @@ def download_video():
     ytbDL.download_video(video_url, download_path)
 
 
-# TODO remove
-def test():
-    print(stringEntry.get())
+def confirm_button_actions():
+    global checkbutton_var
+    global download_path
+
+    path_input = stringEntry2.get()
+    # check box if input
+    condition = len(path_input) > 0
+    checkbutton_var.set(condition)
+
+    download_path = path_input
+
+    # Add new path to json
+    if condition:
+        add_download_path(path_input)
+
+
+# Paths
+def load_paths():
+    try:
+        with open("Path/paths.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return
+
+
+def save_path(path):
+    with open("Path/paths.json", "w") as file:
+        json.dump(path, file, indent=4)
+
+
+def add_download_path(path):
+    path_json = load_paths()
+    path_json["paths"].append(path)
+    save_path(path_json)
 
 
 # window
 window = tk.Tk()
-window.title("YtDl")
+window.title("YouTube Dl")
 window.geometry('700x400')
 
 # column config
@@ -62,31 +94,20 @@ input_frame2.grid(row=6, column=0, padx=10, pady=0)
 
 # ENTRY LOCATION
 stringEntry2 = tk.StringVar()
-entry2 = ttk.Entry(master=input_frame2, width=50, textvariable=stringEntry2)
-entry2.grid(row=7, column=0, padx=10, pady=0)
 
 # CHECKBOX LOCATION
 checkbutton_var = tk.BooleanVar(value=False)
 checkbutton = tk.Checkbutton(input_frame2, variable=checkbutton_var, state=tk.DISABLED, padx=5, )
 checkbutton.grid(row=7, column=1, sticky='e')
 
-
-def confirm_button_actions():
-    global checkbutton_var
-    global download_path
-    # check box if input
-    condition = len(stringEntry2.get()) > 0
-    checkbutton_var.set(condition)
-
-    download_path = stringEntry2.get()
-
+# dropdown
+combo_values = load_paths()["paths"]
+dropdown = ttk.Combobox(master=input_frame2, width=50, textvariable=stringEntry2, values=combo_values)
+dropdown.grid(row=7, column=0, padx=10, pady=0)
 
 # BUTTON LOCATION
 button2 = ttk.Button(master=window, text='Confirm', style='my2.TButton', command=confirm_button_actions)
 button2.grid(row=8, column=0, padx=10, pady=10)
-
-# TODO add path confirmed checkbox
-
 
 # Image
 image_path = "Image/blobicon.png"
