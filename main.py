@@ -1,2 +1,3 @@
-import ytbDL
-import ui
+import uic
+
+uic.Gui()

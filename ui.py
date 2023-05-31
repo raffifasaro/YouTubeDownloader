@@ -1,4 +1,4 @@
-import tkinter as tk
+"""import tkinter as tk
 from tkinter import ttk
 import ytbDL
 import json
@@ -118,4 +118,4 @@ image_label = tk.Label(window, image=resized_photo)
 image_label.grid(row=4, column=0)
 
 # run
-window.mainloop()
+window.mainloop()"""
