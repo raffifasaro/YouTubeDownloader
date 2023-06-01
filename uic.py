@@ -40,8 +40,8 @@ class Gui(tk.Tk):
         photo = tk.PhotoImage(file=image_path)
         resized_photo = photo.subsample(int(photo.width() / 75), int(photo.height() / 75))
 
-        image_label = tk.Label(self, image=resized_photo)
-        image_label.grid(row=4, column=0)
+        tk.Label(self, image=resized_photo) \
+            .grid(row=4, column=0)
 
         # Run
         self.mainloop()
@@ -88,8 +88,12 @@ def save_path(path):
 
 def add_download_path(path):
     path_json = load_paths()
-    path_json["paths"].append(path)
-    save_path(path_json)
+    paths = path_json['paths']
+
+    # check if path already exists
+    if path not in paths:
+        paths.append(path)
+        save_path(path_json)
 
 
 class LocationSec(ttk.Frame):
@@ -108,8 +112,8 @@ class LocationSec(ttk.Frame):
         # Dropdown
         self.string_entry2 = tk.StringVar()
         combo_values = load_paths()["paths"]
-        dropdown = ttk.Combobox(master=self, width=50, textvariable=self.string_entry2, values=combo_values)
-        dropdown.grid(row=7, column=0, padx=10, pady=0)
+        ttk.Combobox(master=self, width=50, textvariable=self.string_entry2, values=combo_values) \
+            .grid(row=7, column=0, padx=10, pady=0)
 
         # Checkbox
         self.checkbutton_var = tk.BooleanVar(value=False)
