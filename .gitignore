@@ -25,6 +25,7 @@ env/
 
 #pyinstaller
 build/
+dist/
 main.spec
 
 # Old
