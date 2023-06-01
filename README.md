@@ -2,6 +2,6 @@
 
 # YouTubeDownloader
 Simple tool to download YouTube videos using the Pytube package for the backend and the Tkinter package for the Ui
-</div>
+![ReadmeYTDL2](https://github.com/raffifasaro/YouTubeDownloader/assets/134242785/ac6f682d-e6d0-4810-8548-90a2bc2638da)
 
-![ReadmeYTDL](https://github.com/raffifasaro/YouTubeDownloader/assets/134242785/46cf7c5f-2132-4fda-8b65-3931badb1162)
+</div>
