@@ -23,5 +23,9 @@ __pycache__/
 venv/
 env/
 
+#pyinstaller
+build/
+main.spec
+
 # Old
 ui.py
